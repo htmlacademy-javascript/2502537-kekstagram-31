@@ -1,5 +1,4 @@
 // *** функция проверки длины строки //
-
 const stringLengthControl = (string, length) => {
   if (string.length <= length) {
     return true;
@@ -8,7 +7,7 @@ const stringLengthControl = (string, length) => {
   }
 };
 
-// проверки работы функции
+// проверки функции
 stringLengthControl('проверяемая строка', 20); // true
 stringLengthControl('проверяемая строка', 18); // true
 stringLengthControl('проверяемая строка', 10); // false
