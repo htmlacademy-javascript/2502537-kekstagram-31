@@ -71,7 +71,7 @@ const createUserPhotoDescription = (i) => {
   return {
     id: i,
     url: `photos/${i}.jpg`,
-    description: userRandomDescription,
+    description: description[userRandomDescription],
     likes: userRandomLikes,
     comments: Array.from({ length: getRandomNum(1, 5) }, (el, key) =>
       createUsersPhotoComments(parseInt(i.toString() + 0 + key.toString(), 10))
@@ -85,5 +85,5 @@ const generateUserPhotoDescription = Array.from(
   (el, key) => createUserPhotoDescription(key)
 );
 
-// проверока вывода массива с обьектами в консоли
+// проверока вывода массива с обьектами в консоли (Eslint гурается на вывод )
 console.log(generateUserPhotoDescription);
