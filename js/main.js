@@ -1,2 +1,2 @@
-import { generateUserPhotoDescription } from './createPhotoDetails.js';
+import {generateUserPhotoDescription} from './create-photo-details.js';
 generateUserPhotoDescription();
