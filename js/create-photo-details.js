@@ -34,4 +34,4 @@ const createUserPhotoDescription = (i) => {
 const generateUserPhotoDescription = Array.from({ length: 25 }, (el, key) => createUserPhotoDescription(key)
 );
 
-export {generateUserPhotoDescription};
+export { generateUserPhotoDescription };
