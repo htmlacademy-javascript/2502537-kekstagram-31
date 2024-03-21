@@ -1,6 +1,10 @@
-import { generateUserPhotoDescription } from './create-photo-details.js';
-import { pictureElement, pictureContainer } from './picture-elements.js';
+import { pictureContainer } from './picture-elements';
+import { openPicture } from './modal';
 
-generateUserPhotoDescription();
-pictureElement();
-pictureContainer();
+pictureContainer.addEventlistener('click', (evt) => {
+  const currentPictureContainer = evt.target.closest('.picture');
+
+  if (currentPictureContainer) {
+    openPicture(currentPictureContainer.dataset.pictureId);
+  }
+});

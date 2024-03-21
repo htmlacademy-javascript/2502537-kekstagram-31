@@ -16,7 +16,7 @@ const createUsersPhotoComments = (i) => {
 };
 
 //функция создания объекта
-const createUserPhotoDescription = (i) => {
+const createUserPhoto = (i) => {
   const userRandomDescription = getRandomNum(0, description.length - 1);
   const userRandomLikes = getRandomNum(15, 200);
   return {
@@ -31,7 +31,7 @@ const createUserPhotoDescription = (i) => {
 };
 
 //создаем массив объектов
-const generateUserPhotoDescription = Array.from({ length: 25 }, (el, key) => createUserPhotoDescription(key)
+const generateUserPhoto = Array.from({ length: 25 }, (el, key) => createUserPhoto(key)
 );
 
-export { generateUserPhotoDescription };
+export { generateUserPhoto };
