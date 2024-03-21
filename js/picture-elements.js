@@ -1,22 +1,21 @@
-import { generateUserPhotoDescription } from './create-photo-details.js';
+import { generateUserPhoto } from './create-photo-details.js';
 
 const pictureContainer = document.querySelector('.picture');
 const pictureTemplate = document.querySelector('#picture').content;
-
-const pictureElement = generateUserPhotoDescription();
 const pictureListElement = document.createDocumentFragment();
 
-pictureElement.forEach(({url, description, comments, likes}) => {
+generateUserPhoto.forEach(({id, url, description, comments, likes}) => {
 
   const elementList = pictureTemplate.cloneNode(true);
-  elementList.querySelector('.picture__img').src = url;
-  elementList.querySelector('.picture__img').alt = description;
-  elementList.querySelector('.picture__comments').textContent = comments.length;
-  elementList.querySelector('.picture__likes').textContent = likes;
-  elementList.append(elementList);
+  pictureContainer.dataset.pictureId = id;
+  pictureContainer.querySelector('.picture__img').src = url;
+  pictureContainer.querySelector('.picture__img').alt = description;
+  pictureContainer.querySelector('.picture__comments').textContent = comments.length;
+  pictureContainer.querySelector('.picture__likes').textContent = likes;
 
+  elementList.append(pictureContainer);
 });
 
 pictureContainer.append(pictureListElement);
 
-export { pictureElement, pictureContainer };
+export { pictureContainer };
