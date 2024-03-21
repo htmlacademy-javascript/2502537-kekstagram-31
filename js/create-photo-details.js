@@ -31,7 +31,7 @@ const createUserPhoto = (i) => {
 };
 
 //создаем массив объектов
-const generateUserPhoto= Array.from({ length: 25 }, (el, key) => createUserPhoto(key)
+const generateUserPhoto = Array.from({ length: 25 }, (el, key) => createUserPhoto(key)
 );
 
 export { generateUserPhoto };
