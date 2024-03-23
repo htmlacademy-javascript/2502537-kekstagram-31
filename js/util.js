@@ -6,7 +6,7 @@ const getRandomNum = (min, max) => {
   return Math.floor(result);
 };
 
-// функция генерации случайнего числа id опубликованной фотографии
+// функция генерации случайнего числа id
 const createRandomId = (min, max) => {
   const earlyValues = [];
 
@@ -24,6 +24,5 @@ const createRandomId = (min, max) => {
   };
 };
 
-const isEscapeKey = (evt) => evt.key === 'Escape';
-
-export { getRandomNum, createRandomId, isEscapeKey };
+getRandomNum();
+createRandomId();
