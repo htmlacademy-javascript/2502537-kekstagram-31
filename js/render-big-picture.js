@@ -4,43 +4,86 @@ const bigPictureImageElement = bigPictureElement.querySelector('.big-picture__so
 const bigPictureLikesElement = bigPictureImageElement.querySelector('.social__likes').querySelector('.likes-count');
 const bigPictureCommentsElement = bigPictureImageElement.querySelector('.social__comment-count').querySelector('.comments-count');
 const bigPictureCaptionElement = bigPictureImageElement.querySelector('.social__caption');
-
-
 const commentsList = bigPictureImageElement.querySelector('.social__comments');
 const commentTemplate = bigPictureImageElement.querySelector('.social__comment');
 const commentsCountMember = bigPictureImageElement.querySelector('.social__comment-count');
 const commentsLoaderButton = bigPictureImageElement.querySelector('.comments-loader');
-
 const closeButton = bigPictureElement.querySelector('.big-picture__cancel');
 
-const clickToOpen = (evt) => {
-  evt.preventDefault();
-  bigPictureElement.classList.remove('hidden');
-  commentsCountMember.classList.add('hidden');
-  commentsLoaderButton.classList.add('hidden');
-  document.body.classList.add('modal-open');
+const commentsQuantitty = 5;
+
+const renderComment = (avatar, username, message) => {
+  const commentFragment = document.createDocumentFragment();
+  const commentMember = commentTemplate.cloneNode(true);
+
+  const avatarElement = commentMember.querySelector('.social__picture');
+  avatarElement.src = avatar;
+  const commentTextElement = commentMember.querySelector('.social__text');
+  avatarElement.alt = username;
+  commentTextElement.textContent = message;
+  commentFragment.append(commentMember);
+
+  const commentListFragment = document.createDocumentFragment();
+  commentListFragment.append(commentFragment);
+  commentsList.append(commentListFragment);
 };
 
-const clickToClose = (evt) => {
-  evt.preventDefault();
-  bigPictureElement.classList.add('hidden');
-  document.body.classList.remove('modal-open');
+const renderShownComments = (comments) => {
+  commentsList.innerHTML = '';
+  const shownComments = comments.slice(0,commentsQuantitty);
+  shownComments.forEach(({avatar, username, message}) => renderComment(avatar, username, message));
+
+  if (commentsList.children.length === comments.length) {
+    commentsLoaderButton.classList.add('hidden');
+  }
+
+  commentsCountMember.firstChild.textContent = `${commentsList.children.length} из `;
+
+  const LoadComment = (evt) => {
+    evt.preventDefault();
+    const commentsCount = commentsList.children.length;
+    const otherComments = comments.slice(commentsCount, commentsCount + commentsQuantitty);
+    otherComments.forEach(({avatar, username, message}) => renderComment(avatar, username, message));
+    commentsCountMember.firstChild.textContent = `${commentsList.children.length} из `;
+    if (otherComments.length < commmentsShow) {
+      commentsLoaderButton.classList.add('hidden');
+    }
+  };
+
+  commentsLoaderButton.addEventListener('click', LoadComment);
+
+  const clickToClose = (evt) => {
+    evt.preventDefault();
+    bigPictureElement.classList.add('hidden');
+    commentsList.innerHTML = '';
+    commentsLoaderButton.removeEventListener('click', LoadComment);
+    commentsLoaderButton.classList.remove('hidden');
+  };
+
+  closeButton.addEventListener('click', clickToClose);
+
+  document.addEventListener('click', (evt) => {
+    if (evt.key === 'Escape') {
+      evt.preventDefault();
+      clickToClose(evt);
+    }
+  });
 };
 
-const renderBigPicture = (url, likesCount, commentsCount, description) => {
+const renderBigPicture = (url, likes, description, comments) => {
   bigPictureImage.src = url;
-  bigPictureLikesElement.textContent = likesCount;
-  bigPictureCommentsElement.textContent = commentsCount;
+  bigPictureImage.alt = description;
+  bigPictureLikesElement.textContent = likes;
   bigPictureCaptionElement.textContent = description;
+  bigPictureCommentsElement.textContent = comments.length;
 };
 
 export {
+  renderBigPicture,
   bigPictureElement,
   bigPictureImage,
-  commentsList,
-  commentTemplate,
-  clickToOpen,
-  clickToClose,
-  renderBigPicture,
-  closeButton
+  renderComment,
+  renderShownComments,
+  commentsLoaderButton,
+  commentsCountMember
 };
