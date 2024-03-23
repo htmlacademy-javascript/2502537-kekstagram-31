@@ -28,4 +28,4 @@ const getFullTimeDay = (start, end, meetingStart, durationMeetingTime) => {
 // console.log(getFullTimeDay('14:00', '17:30', '08:0', 90));
 // console.log(getFullTimeDay('8:00', '17:30', '08:00', 900));
 
-export {getHoursInMinutes, getFullTimeDay};
+export { getHoursInMinutes, getFullTimeDay };
