@@ -22,8 +22,8 @@ const renderThumbnail = (posts) => {
 
     const thumbnailOpen = (evt) => {
       evt.preventDefault();
-      bigPictureElement.classList.add('hidden');
-      document.body.classList.remove('modal-open');
+      bigPictureElement.classList.remove('hidden');
+      document.body.classList.add('modal-open');
       renderShownComments(comments);
       renderBigPicture(url, likes, description, comments);
     };
@@ -33,7 +33,7 @@ const renderThumbnail = (posts) => {
 
   const pictureFragment = document.createDocumentFragment();
   pictureFragment.append(pictureListFragment);
-  pictureFragment.append(pictureFragment);
+  pictureList.append(pictureFragment);
 };
 
 renderThumbnail(twinPosts);
