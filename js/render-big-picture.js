@@ -45,7 +45,7 @@ const renderShownComments = (comments) => {
     const otherComments = comments.slice(commentsCount, commentsCount + commentsQuantitty);
     otherComments.forEach(({avatar, username, message}) => renderComment(avatar, username, message));
     commentsCountMember.firstChild.textContent = `${commentsList.children.length} из `;
-    if (otherComments.length < commmentsShow) {
+    if (otherComments.length < commentsQuantitty) {
       commentsLoaderButton.classList.add('hidden');
     }
   };
