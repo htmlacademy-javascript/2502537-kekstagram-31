@@ -69,12 +69,12 @@ const createComments = () => ({
   name: getName(names)}
 );
 
-const createPosts = Array.from(id.map((currentValue, index) => ({
+const createPosts = () => id.map((currentValue, index) => ({
   id: currentValue,
   url: url[index],
   description: descriptions[index],
   likes: getLikes(minLikes, maxLikes),
   comments: Array.from({length: getComments(comments)}, createComments),
-})));
+}));
 
 export { createPosts };

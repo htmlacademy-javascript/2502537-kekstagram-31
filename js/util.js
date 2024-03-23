@@ -26,3 +26,8 @@ const createRandomId = (min, max) => {
 
 getRandomNum();
 createRandomId();
+
+// проверка Escape
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+export { isEscapeKey };

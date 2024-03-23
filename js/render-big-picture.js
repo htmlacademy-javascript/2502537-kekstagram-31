@@ -1,16 +1,20 @@
+import { isEscapeKey } from './util.js';
+
+const commentsQuantitty = 5;
+
 const bigPictureElement = document.querySelector('.big-picture');
 const bigPictureImage = bigPictureElement.querySelector('.big-picture__img').querySelector('img');
 const bigPictureImageElement = bigPictureElement.querySelector('.big-picture__social');
 const bigPictureLikesElement = bigPictureImageElement.querySelector('.social__likes').querySelector('.likes-count');
 const bigPictureCommentsElement = bigPictureImageElement.querySelector('.social__comment-count').querySelector('.comments-count');
 const bigPictureCaptionElement = bigPictureImageElement.querySelector('.social__caption');
+
+const closeButton = bigPictureElement.querySelector('.big-picture__cancel');
+
 const commentsList = bigPictureImageElement.querySelector('.social__comments');
 const commentTemplate = bigPictureImageElement.querySelector('.social__comment');
 const commentsCountMember = bigPictureImageElement.querySelector('.social__comment-count');
 const commentsLoaderButton = bigPictureImageElement.querySelector('.comments-loader');
-const closeButton = bigPictureElement.querySelector('.big-picture__cancel');
-
-const commentsQuantitty = 5;
 
 const renderComment = (avatar, username, message) => {
   const commentFragment = document.createDocumentFragment();
@@ -55,6 +59,7 @@ const renderShownComments = (comments) => {
   const clickToClose = (evt) => {
     evt.preventDefault();
     bigPictureElement.classList.add('hidden');
+    document.body.classList.remove('modal-open');
     commentsList.innerHTML = '';
     commentsLoaderButton.removeEventListener('click', LoadComment);
     commentsLoaderButton.classList.remove('hidden');
@@ -62,8 +67,8 @@ const renderShownComments = (comments) => {
 
   closeButton.addEventListener('click', clickToClose);
 
-  document.addEventListener('click', (evt) => {
-    if (evt.key === 'Escape') {
+  document.addEventListener('keydown', (evt) => {
+    if (isEscapeKey(evt)) {
       evt.preventDefault();
       clickToClose(evt);
     }
