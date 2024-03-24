@@ -9,6 +9,10 @@ const picturePreview = document.querySelector('.img-upload__preview').querySelec
 
 let currentValue = parseFloat(scaleValue.value);
 
+const scaleReset = () => {
+  picturePreview.style.transform = '';
+};
+
 const scaleBiggerImage = () => {
   scaleValue.value = `${currentValue += scaleStep}%`;
   picturePreview.style.transform = `scale(${parseFloat(scaleValue.value) / 100})`;
@@ -38,4 +42,4 @@ const scaleSmallerControl = () => {
 scaleBiggerBtn.addEventListener('click', scaleBiggerControl);
 scaleSmallerBtn.addEventListener('click', scaleSmallerControl);
 
-export { picturePreview };
+export { picturePreview, scaleReset };

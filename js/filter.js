@@ -18,6 +18,12 @@ noUiSlider.create(effectLevelSlider, {
   connect: 'lower',
 });
 
+const filterReset = () => {
+  picturePreview.classList = '';
+  picturePreview.style.filter = '';
+  effectControlContainer.classList.add('hidden');
+};
+
 const changeFilter = (evt) => {
   picturePreview.classList = `effects__preview--${evt.target.value}`;
   if (evt.target.value === 'none') {
@@ -93,3 +99,5 @@ effectLevelSlider.noUiSlider.on('update', () => {
 });
 
 effectControlList.addEventListener('change', changeFilter);
+
+export { filterReset };
