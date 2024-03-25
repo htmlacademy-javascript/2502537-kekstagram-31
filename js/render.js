@@ -12,7 +12,7 @@ const renderThumbnail = (posts) => {
   posts.forEach(({ url, description, likes, comments}) => {
     const pictureContainer = pictureTemplate.cloneNode(true);
     pictureContainer.querySelector('.picture__img').src = url;
-    pictureContainer.querySelector('.picture__img').src = description;
+    pictureContainer.querySelector('.picture__img').alt = description;
     const pictureInfo = pictureContainer.querySelector('.picture__info');
     pictureInfo.querySelector('.picture__comments').textContent = comments.length;
     pictureInfo.querySelector('.picture__likes').textContent = likes;
