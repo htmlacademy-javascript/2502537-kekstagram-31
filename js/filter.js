@@ -5,6 +5,14 @@ const effectControlContainer = document.querySelector('.img-upload__effect-level
 const effectLevelSlider = document.querySelector('.effect-level__slider');
 const effectLevelValue = document.querySelector('.effect-level__value');
 
+const filterValues = {
+  SEPIA: 'sepia',
+  MARVIN: 'marvin',
+  PHOBOS: 'phobos',
+  HEAT: 'heat',
+  NONE: 'none'
+};
+
 effectLevelValue.value = 1;
 effectControlContainer.classList.add('hidden');
 
@@ -26,7 +34,7 @@ const filterReset = () => {
 
 const changeFilter = (evt) => {
   picturePreview.classList = `effects__preview--${evt.target.value}`;
-  if (evt.target.value === 'none') {
+  if (evt.target.value === filterValues.NONE) {
     picturePreview.classList = '';
     picturePreview.style.filter = '';
     effectControlContainer.classList.add('hidden');
@@ -40,7 +48,7 @@ const changeFilter = (evt) => {
       step: 0.1,
     });
     effectControlContainer.classList.remove('hidden');
-  } else if (evt.target.value === 'sepia') {
+  } else if (evt.target.value === filterValues.SEPIA) {
     effectLevelSlider.noUiSlider.updateOptions({
       range: {
         min: 0,
@@ -49,7 +57,7 @@ const changeFilter = (evt) => {
       start: 1,
       step: 0.1,
     });
-  } else if (evt.target.value === 'marvin') {
+  } else if (evt.target.value === filterValues.MARVIN) {
     effectLevelSlider.noUiSlider.updateOptions({
       range: {
         min: 0,
@@ -59,7 +67,7 @@ const changeFilter = (evt) => {
       step: 1,
     });
     effectControlContainer.classList.remove('hidden');
-  } else if (evt.target.value === 'phobos') {
+  } else if (evt.target.value === filterValues.PHOBOS) {
     effectLevelSlider.noUiSlider.updateOptions({
       range: {
         min: 0,
@@ -69,7 +77,7 @@ const changeFilter = (evt) => {
       step: 0.1,
     });
     effectControlContainer.classList.remove('hidden');
-  } else if (evt.target.value === 'heat') {
+  } else if (evt.target.value === filterValues.HEAT) {
     effectLevelSlider.noUiSlider.updateOptions({
       range: {
         min: 0,
