@@ -27,6 +27,9 @@ const hideErrorMessage = () => errorMessageTemplate.remove();
 successBtn.addEventListener('click', hideSuccessMessage);
 errorBtn.addEventListener('click', hideErrorMessage);
 
+window.addEventListener('click', hideSuccessMessage);
+window.addEventListener('click', hideErrorMessage);
+
 document.addEventListener('keydown', (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
@@ -97,7 +100,7 @@ const onSubmit = (evt) => {
           onError();
         }
       })
-      .catch(showAlert('Ошибка! Попробуйте позже'))
+      .catch(showAlert('Ошибка! Попробуйте позже...'))
       .finally(unblockSubmitBtn);
   }
 };

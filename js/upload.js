@@ -14,7 +14,7 @@ const fileUploadOpen = () => {
 };
 
 const fileUploadClose = () => {
-  imageUpload.classList.add('hidden');
+  imageUploadOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
   imageUpload.reset();
   scaleReset();

@@ -43,25 +43,27 @@ const renderShownComments = (comments) => {
 
   commentsCountMember.firstChild.textContent = `${commentsList.children.length} из `;
 
-  const LoadComment = (evt) => {
+  const loadComment = (evt) => {
     evt.preventDefault();
     const commentsCount = commentsList.children.length;
     const otherComments = comments.slice(commentsCount, commentsCount + commentsQuantitty);
     otherComments.forEach(({avatar, username, message}) => renderComment(avatar, username, message));
+
     commentsCountMember.firstChild.textContent = `${commentsList.children.length} из `;
+
     if (otherComments.length < commentsQuantitty) {
       commentsLoaderButton.classList.add('hidden');
     }
   };
 
-  commentsLoaderButton.addEventListener('click', LoadComment);
+  commentsLoaderButton.addEventListener('click', loadComment);
 
   const clickToClose = (evt) => {
     evt.preventDefault();
     bigPictureElement.classList.add('hidden');
     document.body.classList.remove('modal-open');
     commentsList.innerHTML = '';
-    commentsLoaderButton.removeEventListener('click', LoadComment);
+    commentsLoaderButton.removeEventListener('click', loadComment);
     commentsLoaderButton.classList.remove('hidden');
   };
 

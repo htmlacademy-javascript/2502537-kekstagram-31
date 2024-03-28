@@ -56,4 +56,12 @@ const showAlert = (message) => {
   }, alertTime);
 };
 
-export { isEscapeKey, showAlert };
+const recoil = (callback, timeoutDelay) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+
+export { isEscapeKey, showAlert, recoil };
