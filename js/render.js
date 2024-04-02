@@ -1,12 +1,15 @@
 import { bigPictureElement, renderBigPicture, renderShownComments } from './render-big-picture.js';
+// import { createPosts } from './data.js';
 
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const pictureList = document.querySelector('.pictures');
 
+// const twinPosts = createPosts();
+
 const renderThumbnail = (posts) => {
   const pictureListFragment = document.createDocumentFragment();
 
-  posts.forEach(({url, description, likes, comments}) => {
+  posts.forEach(({ url, description, likes, comments}) => {
     const pictureContainer = pictureTemplate.cloneNode(true);
     pictureContainer.querySelector('.picture__img').src = url;
     pictureContainer.querySelector('.picture__img').alt = description;
@@ -25,8 +28,6 @@ const renderThumbnail = (posts) => {
 
     pictureContainer.addEventListener('click', thumbnailOpen);
   });
-
-  document.querySelectorAll('.picture').forEach((pictureContainer) => pictureContainer.remove());
 
   const pictureFragment = document.createDocumentFragment();
   pictureFragment.append(pictureListFragment);
