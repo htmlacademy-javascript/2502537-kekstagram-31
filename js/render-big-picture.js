@@ -2,14 +2,18 @@ import { isEscapeKey } from './util.js';
 
 const commentsQuantitty = 5;
 
-const bigPictureElement = document.querySelector('.big-picture');
-const bigPictureImage = bigPictureElement.querySelector('.big-picture__img').querySelector('img');
-const bigPictureImageElement = bigPictureElement.querySelector('.big-picture__social');
-const bigPictureLikesElement = bigPictureImageElement.querySelector('.social__likes').querySelector('.likes-count');
-const bigPictureCommentsElement = bigPictureImageElement.querySelector('.social__comment-count').querySelector('.comments-count');
-const bigPictureCaptionElement = bigPictureImageElement.querySelector('.social__caption');
+const bigPictureContainer = document.querySelector('.big-picture');
+const bigPictureImage = bigPictureContainer.querySelector('.big-picture__img').querySelector('img');
+const bigPictureImageElement = bigPictureContainer.querySelector('.big-picture__social');
 
-const closeButton = bigPictureElement.querySelector('.big-picture__cancel');
+const bigPictureImageContent = bigPictureContainer.querySelector('.big-picture__social');
+const bigPictureLikesCount = bigPictureImageContent.querySelector('.social__likes').querySelector('.likes-count');
+
+const bigPictureCommentsCount = bigPictureImageContent.querySelector('.social__comment-count').querySelector('.comments-count');
+
+const bigPictureCaption = bigPictureImageElement.querySelector('.social__caption');
+
+const closeButton = bigPictureContainer.querySelector('.big-picture__cancel');
 
 const commentsList = bigPictureImageElement.querySelector('.social__comments');
 const commentTemplate = bigPictureImageElement.querySelector('.social__comment');
@@ -60,7 +64,7 @@ const renderShownComments = (comments) => {
 
   const clickToClose = (evt) => {
     evt.preventDefault();
-    bigPictureElement.classList.add('hidden');
+    bigPictureContainer.classList.add('hidden');
     document.body.classList.remove('modal-open');
     commentsList.innerHTML = '';
     commentsLoaderButton.removeEventListener('click', loadComment);
@@ -80,15 +84,15 @@ const renderShownComments = (comments) => {
 const renderBigPicture = (url, likes, description, comments) => {
   bigPictureImage.src = url;
   bigPictureImage.alt = description;
-  bigPictureLikesElement.textContent = likes;
-  bigPictureCaptionElement.textContent = description;
-  bigPictureCommentsElement.textContent = comments.length;
+  bigPictureLikesCount.textContent = likes;
+  bigPictureCaption.textContent = description;
+  bigPictureCommentsCount.textContent = comments.length;
 };
 
 export {
   renderBigPicture,
-  bigPictureElement,
-  bigPictureImage,
+  bigPictureContainer,
+  bigPictureImageContent,
   renderComment,
   renderShownComments,
   commentsLoaderButton,

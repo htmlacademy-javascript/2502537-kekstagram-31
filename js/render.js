@@ -1,36 +1,35 @@
-import { bigPictureElement, renderBigPicture, renderShownComments } from './render-big-picture.js';
-// import { createPosts } from './data.js';
+import { bigPictureContainer, renderBigPicture, renderShownComments } from './render-big-picture.js';
 
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const pictureList = document.querySelector('.pictures');
 
-// const twinPosts = createPosts();
-
 const renderThumbnail = (posts) => {
-  const pictureListFragment = document.createDocumentFragment();
+  const pictureElementFragment = document.createDocumentFragment();
 
   posts.forEach(({ url, description, likes, comments}) => {
-    const pictureContainer = pictureTemplate.cloneNode(true);
-    pictureContainer.querySelector('.picture__img').src = url;
-    pictureContainer.querySelector('.picture__img').alt = description;
-    const pictureInfo = pictureContainer.querySelector('.picture__info');
-    pictureInfo.querySelector('.picture__comments').textContent = comments.length;
-    pictureInfo.querySelector('.picture__likes').textContent = likes;
-    pictureListFragment.append(pictureContainer);
+    const pictureElement = pictureTemplate.cloneNode(true);
+    pictureElement.querySelector('.picture__img').src = url;
+    pictureElement.querySelector('.picture__img').alt = description;
+    const pictureInfoElement = pictureElement.querySelector('.picture__info');
+    pictureInfoElement.querySelector('.picture__comments').textContent = comments.length;
+    pictureInfoElement.querySelector('.picture__likes').textContent = likes;
+    pictureElementFragment.append(pictureElement);
 
     const thumbnailOpen = (evt) => {
       evt.preventDefault();
-      bigPictureElement.classList.remove('hidden');
+      bigPictureContainer.classList.remove('hidden');
       document.body.classList.add('modal-open');
       renderShownComments(comments);
       renderBigPicture(url, likes, description, comments);
     };
 
-    pictureContainer.addEventListener('click', thumbnailOpen);
+    pictureElement.addEventListener('click', thumbnailOpen);
   });
 
+  document.querySelectorAll('.picture').forEach((pictureElement) => pictureElement.remove());
+
   const pictureFragment = document.createDocumentFragment();
-  pictureFragment.append(pictureListFragment);
+  pictureFragment.append(pictureElementFragment);
   pictureList.append(pictureFragment);
 };
 

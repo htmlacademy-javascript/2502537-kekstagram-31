@@ -1,6 +1,6 @@
 import { getData } from './api.js';
 import { renderThumbnail } from './render.js';
-import { recoil } from './util.js';
+import { recoil, showAlert } from './util.js';
 const schowMaxRandomPosts = 10;
 const renderDelay = 500;
 
@@ -63,4 +63,5 @@ getData()
     onRandomLoad(recoil(() => renderThumbnail(randomFilter(posts)), renderDelay));
     onDiscussedLoad(recoil(() => renderThumbnail(discussedFilter(posts)), renderDelay));
   })
-  .then(() => filtersControl());
+  .then(() => filtersControl())
+  .catch(() => showAlert('Не удалось загрузить страницу, попробуйте позже'));
