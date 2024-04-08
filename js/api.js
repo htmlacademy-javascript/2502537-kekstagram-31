@@ -1,11 +1,33 @@
-const getData = () => fetch('https://31.javascript.htmlacademy.pro/kekstagram/data')
-  .then((response) => response.json());
+const SERVER_URL = 'https://31.javascript.htmlacademy.pro/kekstagram';
+
+const serverRoute = {
+  GET_DATA: '/data',
+  SEND_DATA: '/',
+};
+
+const HttpMethod = {
+  GET: 'GET',
+  POST: 'POST',
+};
+
+const textError = {
+  [HttpMethod.GET]: 'Не удалось загрузить данные с сервера.',
+  [HttpMethod.POST]: 'Не удалось отправить данные формы.',
+};
+
+const request = async (url, method = HttpMethod.GET, body = null) => {
+  const response = await fetch(url, { method, body });
+  if (!response.ok) {
+    throw new Error(textError[method]);
+  }
+
+  return response.json();
+};
+
+const loadPictures = async () => request(SERVER_URL + serverRoute.GET_DATA);
 
 
-const sendData = (body) => fetch('https://31.javascript.htmlacademy.pro/kekstagram',
-  {
-    method: 'POST',
-    body
-  });
+const sendPictures = async (pictureData) => request(SERVER_URL + serverRoute.SEND_DATA, HttpMethod.POST, pictureData);
 
-export { getData, sendData };
+
+export { loadPictures, sendPictures };
