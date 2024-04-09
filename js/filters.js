@@ -9,16 +9,16 @@ const defaultFilterButton = filterForm.querySelector('#filter-default');
 const randomFilterButton = filterForm.querySelector('#filter-random');
 const discussedFilterButton = filterForm.querySelector('#filter-discussed');
 
-const filterEnum = {
+const FilterEnum = {
   DEFAULT: 'default',
   RANDOM: 'random',
   DISCUSSED: 'discussed',
 };
 
 const filterHandlers = {
-  [filterEnum.DEFAULT]: (data) => data,
+  [FilterEnum.DEFAULT]: (data) => data,
 
-  [filterEnum.RANDOM]: (data) => {
+  [FilterEnum.RANDOM]: (data) => {
     const selectedIndexes = new Set();
     const max = Math.min(MAX_RANDOM_FILTER, data.length);
 
@@ -33,7 +33,7 @@ const filterHandlers = {
     return Array.from(selectedIndexes).map((index) => data[index]);
   },
 
-  [filterEnum.DISCUSSED]: (data) =>
+  [FilterEnum.DISCUSSED]: (data) =>
     data.slice().sort((item1, item2) => item2.comments.length - item1.comments.length),
 };
 
@@ -66,13 +66,13 @@ const initFilters = (data) => {
   filterForm.addEventListener('click', onFormFiltersClick);
 
   defaultFilterButton.addEventListener('click', (evt) => {
-    debounceRepaint(evt, filterEnum.DEFAULT, data);
+    debounceRepaint(evt, FilterEnum.DEFAULT, data);
   });
   randomFilterButton.addEventListener('click', (evt) => {
-    debounceRepaint(evt, filterEnum.RANDOM, data);
+    debounceRepaint(evt, FilterEnum.RANDOM, data);
   });
   discussedFilterButton.addEventListener('click', (evt) => {
-    debounceRepaint(evt, filterEnum.DISCUSSED, data);
+    debounceRepaint(evt, FilterEnum.DISCUSSED, data);
   });
 };
 
