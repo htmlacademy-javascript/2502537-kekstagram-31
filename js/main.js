@@ -4,7 +4,7 @@ import { loadPictures } from './api.js';
 import { showErrorMessage } from './util.js';
 import { initFilters } from './filters.js';
 
-const bootstrap = async () => {
+const getPictures = async () => {
   try {
     const pictures = await loadPictures();
     renderGallery(pictures);
@@ -14,4 +14,4 @@ const bootstrap = async () => {
   }
 };
 
-bootstrap();
+getPictures();

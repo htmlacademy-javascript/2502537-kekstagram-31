@@ -1,6 +1,6 @@
 const SERVER_URL = 'https://31.javascript.htmlacademy.pro/kekstagram';
 
-const serverRoute = {
+const LinkTail = {
   GET_DATA: '/data',
   SEND_DATA: '/',
 };
@@ -24,10 +24,10 @@ const request = async (url, method = HttpMethod.GET, body = null) => {
   return response.json();
 };
 
-const loadPictures = async () => request(SERVER_URL + serverRoute.GET_DATA);
+const loadPictures = async () => request(SERVER_URL + LinkTail.GET_DATA);
 
 
-const sendPictures = async (pictureData) => request(SERVER_URL + serverRoute.SEND_DATA, HttpMethod.POST, pictureData);
+const sendPictures = async (pictureData) => request(SERVER_URL + LinkTail.SEND_DATA, HttpMethod.POST, pictureData);
 
 
 export { loadPictures, sendPictures };
