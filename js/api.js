@@ -10,7 +10,7 @@ const HttpMethod = {
   POST: 'POST',
 };
 
-const textError = {
+const TextError = {
   [HttpMethod.GET]: 'Не удалось загрузить данные с сервера.',
   [HttpMethod.POST]: 'Не удалось отправить данные формы.',
 };
@@ -18,7 +18,7 @@ const textError = {
 const request = async (url, method = HttpMethod.GET, body = null) => {
   const response = await fetch(url, { method, body });
   if (!response.ok) {
-    throw new Error(textError[method]);
+    throw new Error(TextError[method]);
   }
 
   return response.json();
@@ -26,8 +26,6 @@ const request = async (url, method = HttpMethod.GET, body = null) => {
 
 const loadPictures = async () => request(SERVER_URL + LinkTail.GET_DATA);
 
-
 const sendPictures = async (pictureData) => request(SERVER_URL + LinkTail.SEND_DATA, HttpMethod.POST, pictureData);
-
 
 export { loadPictures, sendPictures };
